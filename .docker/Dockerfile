@@ -80,12 +80,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
     ros-$ROS_DISTRO-rviz2 \
     ros-$ROS_DISTRO-rmw-cyclonedds-cpp \
     ros-$ROS_DISTRO-ros-testing \
-    ros-$ROS_DISTRO-ros2bag \
-    ros-$ROS_DISTRO-ign-ros2-control \
-    ros-$ROS_DISTRO-moveit \
-    ros-$ROS_DISTRO-moveit-servo \
-    ros-$ROS_DISTRO-moveit-visual-tools \
-    ros-$ROS_DISTRO-pilz-industrial-motion-planner \
+    ros-$ROS_DISTRO-ros2bag \git submodule deinit -f <submodule-path>
+    -planner \
     ros-$ROS_DISTRO-ros-ign-bridge \
     ros-$ROS_DISTRO-ros-ign-gazebo \
     ros-$ROS_DISTRO-ament-clang-format \
@@ -99,10 +95,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
 RUN mkdir -p /dev_ws/src
 
 WORKDIR /dev_ws/src
-
-RUN git clone -b humble https://github.com/clearpathrobotics/clearpath_common.git \
-    && git clone -b humble https://github.com/clearpathrobotics/clearpath_config.git \
-    && git clone -b humble https://github.com/clearpathrobotics/clearpath_msgs.git 
     
 RUN wget https://packages.clearpathrobotics.com/public.key -O - | sudo apt-key add - \
     && sudo sh -c 'echo "deb https://packages.clearpathrobotics.com/stable/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/clearpath-latest.list' \
