@@ -128,23 +128,21 @@ def generate_launch_description():
             tf_prefix,
         ]
     )
-    robot_description = {
-        "robot_description": ParameterValue(value=robot_description_content, value_type=str)
-    }
+    robot_description = {"robot_description": ParameterValue(value=robot_description_content, value_type=str)}
 
-    rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
-    )
+    rviz_config_file = PathJoinSubstitution([FindPackageShare(description_package), "rviz", "view_robot.rviz"])
 
     joint_state_publisher_node = Node(
         package="joint_state_publisher_gui",
         executable="joint_state_publisher_gui",
+        remappings=[("robot_description", "ur_robot_description")],
     )
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
         parameters=[robot_description],
+        remappings=[("robot_description", "ur_robot_description")],
     )
     rviz_node = Node(
         package="rviz2",

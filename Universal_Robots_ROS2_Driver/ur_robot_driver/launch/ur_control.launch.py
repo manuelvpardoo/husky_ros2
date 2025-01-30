@@ -200,17 +200,13 @@ def launch_setup(context, *args, **kwargs):
             " ",
         ]
     )
-    robot_description = {
-        "robot_description": ParameterValue(value=robot_description_content, value_type=str)
-    }
+    robot_description = {"robot_description": ParameterValue(value=robot_description_content, value_type=str)}
 
     initial_joint_controllers = PathJoinSubstitution(
         [FindPackageShare(runtime_config_package), "config", controllers_file]
     )
 
-    rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(description_package), "rviz", "view_robot.rviz"]
-    )
+    rviz_config_file = PathJoinSubstitution([FindPackageShare(description_package), "rviz", "view_robot.rviz"])
 
     # define update rate
     update_rate_config_file = PathJoinSubstitution(
@@ -247,9 +243,7 @@ def launch_setup(context, *args, **kwargs):
 
     dashboard_client_node = Node(
         package="ur_robot_driver",
-        condition=IfCondition(
-            AndSubstitution(launch_dashboard_client, NotSubstitution(use_fake_hardware))
-        ),
+        condition=IfCondition(AndSubstitution(launch_dashboard_client, NotSubstitution(use_fake_hardware))),
         executable="dashboard_client",
         name="dashboard_client",
         output="screen",
@@ -306,6 +300,7 @@ def launch_setup(context, *args, **kwargs):
         executable="robot_state_publisher",
         output="both",
         parameters=[robot_description],
+        remappings=[("robot_description", "ur_robot_description")],
     )
 
     rviz_node = Node(
@@ -400,9 +395,7 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_ip", description="IP address by which the robot can be reached."
-        )
+        DeclareLaunchArgument("robot_ip", description="IP address by which the robot can be reached.")
     )
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -522,13 +515,9 @@ def generate_launch_description():
             description="Activate loaded joint controller.",
         )
     )
+    declared_arguments.append(DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?"))
     declared_arguments.append(
-        DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "launch_dashboard_client", default_value="true", description="Launch Dashboard Client?"
-        )
+        DeclareLaunchArgument("launch_dashboard_client", default_value="true", description="Launch Dashboard Client?")
     )
     declared_arguments.append(
         DeclareLaunchArgument(

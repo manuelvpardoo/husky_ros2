@@ -147,7 +147,7 @@
     <!-- Placeholder for ros2_control transmission which don't yet exist -->
 
     <!-- links -  main serial chain -->
-    <link name="${tf_prefix}base_link"/>
+    <link name="${tf_prefix}ur_base_link"/>
     <link name="${tf_prefix}base_link_inertia">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
@@ -328,12 +328,12 @@
     <joint name="${tf_prefix}base_joint" type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}" />
-      <child link="${tf_prefix}base_link" />
+      <child link="${tf_prefix}ur_base_link" />
     </joint>
 
     <!-- joints - main serial chain -->
     <joint name="${tf_prefix}base_link-base_link_inertia" type="fixed">
-      <parent link="${tf_prefix}base_link" />
+      <parent link="${tf_prefix}ur_base_link" />
       <child link="${tf_prefix}base_link_inertia" />
       <!-- 'base_link' is REP-103 aligned (so X+ forward), while the internal
            frames of the robot/controller have X+ pointing backwards.
@@ -439,7 +439,7 @@
            the UR controller.
       -->
       <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
-      <parent link="${tf_prefix}base_link"/>
+      <parent link="${tf_prefix}ur_base_link"/>
       <child link="${tf_prefix}base"/>
     </joint>
 
