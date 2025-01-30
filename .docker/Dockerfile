@@ -80,8 +80,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
     ros-$ROS_DISTRO-rviz2 \
     ros-$ROS_DISTRO-rmw-cyclonedds-cpp \
     ros-$ROS_DISTRO-ros-testing \
-    ros-$ROS_DISTRO-ros2bag \git submodule deinit -f <submodule-path>
-    -planner \
+    ros-$ROS_DISTRO-ros2bag \
+    ros-$ROS_DISTRO-ign-ros2-control \
+    ros-$ROS_DISTRO-moveit \
+    ros-$ROS_DISTRO-moveit-servo \
+    ros-$ROS_DISTRO-moveit-visual-tools \
+    ros-$ROS_DISTRO-pilz-industrial-motion-planner \
     ros-$ROS_DISTRO-ros-ign-bridge \
     ros-$ROS_DISTRO-ros-ign-gazebo \
     ros-$ROS_DISTRO-ament-clang-format \
